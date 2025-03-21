@@ -33,13 +33,45 @@ class Grid {
         if (emptyCells.length > 0) {
             const randomElement = Math.floor(Math.random() * emptyCells.length);
             const randomCell = emptyCells[randomElement];
-            const randomValue = Math.random() < 0.5 ? 2 : 4;
-            this.cells[randomCell.row][randomCell.col] = randomValue;
-            // this.cells.push({ x: randomCell.row, y: randomCell.col });
+            const { row: x, col: y } = randomCell;
+            const randomValue = Math.random() < 0.8 ? 2 : 4;
+            this.insertTile(new Tile({ x, y }, randomValue));
+
+            // this.cells[randomCell.row][randomCell.col] = { x: (randomCell.col), y: (randomCell.row), value: randomValue };
+            // this.cells.push({ x: randomCell.row, y: randomCell.col, value: randomValue });
         }
     };
 
     eachCell() {
 
-    }
+    };
+
+    withinBounds(position) {
+        return position.x >= 0 && position.x < this.size &&
+            position.y >= 0 && position.y < this.size;
+    };
+
+    insertTile(tile) {
+        this.cells[tile.x][tile.y] = tile;
+    };
+
+    removeTile(tile) {
+        this.cells[tile.x][tile.y] = null;
+    };
+
+    cellAvailable(cell) {
+        return !this.cellOccupied(cell);
+    };
+
+    cellOccupied(cell) {
+        return !!this.cellContent(cell);
+    };
+
+    cellContent(cell) {
+        if (this.withinBounds(cell)) {
+            return this.cells[cell.x][cell.y];
+        } else {
+            return null;
+        }
+    };
 }

@@ -33,14 +33,14 @@ class KeyboardInputManager {
     restart(event) {
         event.preventDefault();
         this.emit("restart");
-    }
+    };
 
     listen() {
         const map = {
             "ArrowUp": 0, // up
-            "ArrowLeft": 1, // right
+            "ArrowRight": 1, // right
             "ArrowDown": 2, // down
-            "ArrowRight": 3, // left
+            "ArrowLeft": 3, // left
             75: 0, // Vim up
             76: 1, // Vim right
             74: 2, // Vim down
@@ -58,7 +58,6 @@ class KeyboardInputManager {
             if (!modifiers) {
                 if (mapped !== undefined) {
                     event.preventDefault();
-                    console.log(event.key);
                     this.emit("move", mapped);
                 }
 
@@ -68,5 +67,15 @@ class KeyboardInputManager {
                 }
             }
         });
-    }
+        const newGameButton = document.querySelector('.new-game-button');
+        newGameButton.addEventListener("click", (event) => {
+            this.restart(event);
+        })
+    };
+
+
+    // restart(event) {
+    //     event.preventDefault();
+    //     console.log("restart");
+    // }
 }

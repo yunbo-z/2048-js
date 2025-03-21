@@ -5,3 +5,7 @@
   - All the cells will move towards one direction in one time.
   - Every two equal cells will be merged into a doubled number.
   - For every cell, one merge will happend during one move.
+
+
+- Questions:
+  - how to let the random value appear into a random cell?
